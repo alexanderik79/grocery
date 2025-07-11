@@ -42,11 +42,39 @@ const ItemList: React.FC = () => {
     try {
       const encodedList = btoa(JSON.stringify(items));
       const shareUrl = `${window.location.origin}/?list=${encodedList}`;
-      navigator.clipboard.writeText(shareUrl);
+      
+      // Проверяем поддержку navigator.clipboard
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          window.alert('Share link copied to clipboard!');
+        }).catch(() => {
+          fallbackCopyToClipboard(shareUrl);
+        });
+      } else {
+        fallbackCopyToClipboard(shareUrl);
+      }
+    } catch (e) {
+      window.alert('Failed to generate share link. Try again or check browser permissions.');
+      console.warn('Share error:', e);
+    }
+  };
+
+  // Альтернативный метод копирования для мобильных
+  const fallbackCopyToClipboard = (text: string) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
       window.alert('Share link copied to clipboard!');
     } catch (e) {
-      window.alert('Failed to generate share link.');
-      console.warn('Share error:', e);
+      window.alert('Failed to copy share link. Please copy it manually.');
+      console.warn('Fallback copy error:', e);
+    } finally {
+      document.body.removeChild(textarea);
     }
   };
 
