@@ -1,5 +1,42 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { colors } from './GlobalStyles';
+
+// Анимация появления (slide-in + fade-in)
+const slideIn = keyframes`
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
+
+// Анимация удаления (fade-out + slide-out)
+const slideOut = keyframes`
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+`;
+
+// Анимация для чекбокса (масштабирование)
+const scale = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 
 export const ListContainer = styled.div`
   display: flex;
@@ -13,13 +50,19 @@ export const ItemContainer = styled.div`
   background-color: ${colors.card};
   padding: 12px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   gap: 8px;
+  animation: ${slideIn} 0.3s ease-out forwards;
+
+  &.removing {
+    animation: ${slideOut} 0.3s ease-out forwards;
+  }
 `;
 
 export const ItemText = styled.span<{ purchased: boolean }>`
   flex-grow: 1;
   font-size: 0.9rem;
+  color: ${colors.text};
   text-decoration: ${({ purchased }) => (purchased ? 'line-through' : 'none')};
 `;
 
@@ -27,7 +70,7 @@ export const DeleteButton = styled.button`
   font-size: 0.8rem;
   padding: 6px 12px;
   background-color: ${colors.error};
-  color: white;
+  color: ${colors.text};
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -39,6 +82,11 @@ export const DeleteButton = styled.button`
 export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   width: 16px;
   height: 16px;
+  accent-color: ${colors.primary};
+  cursor: pointer;
+  &:checked {
+    animation: ${scale} 0.2s ease;
+  }
 `;
 
 export const EmptyText = styled.p`
