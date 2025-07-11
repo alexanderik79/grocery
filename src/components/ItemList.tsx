@@ -40,13 +40,8 @@ const ItemList: React.FC = () => {
   const handleShare = async () => {
     if (items.length === 0) return;
     try {
-      const sanitizedItems = items.map(item => ({
-        ...item,
-        name: item.name.replace(/[^\x20-\x7E]/g, ''), // Только ASCII
-      }));
-      const encodedList = btoa(JSON.stringify(sanitizedItems));
+      const encodedList = btoa(encodeURIComponent(JSON.stringify(items)));
       const shareUrl = `${window.location.origin}/?list=${encodedList}`;
-
       if (navigator.share) {
         await navigator.share({
           title: 'Shopping List',
