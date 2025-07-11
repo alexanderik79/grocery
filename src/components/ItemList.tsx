@@ -37,19 +37,30 @@ const ItemList: React.FC = () => {
     }
   };
 
-  const handleShare = () => {
+  const handleShare = async () => {
     if (items.length === 0) return;
     try {
-      // Очищаем данные от не-ASCII символов
       const sanitizedItems = items.map(item => ({
         ...item,
         name: item.name.replace(/[^\x20-\x7E]/g, ''), // Только ASCII
       }));
       const encodedList = btoa(JSON.stringify(sanitizedItems));
       const shareUrl = `${window.location.origin}/?list=${encodedList}`;
-      window.alert(`Copy this link to share:\n${shareUrl}`);
+
+      if (navigator.share) {
+        await navigator.share({
+          title: 'Shopping List',
+          text: 'Check out my shopping list!',
+          url: shareUrl,
+        });
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        window.alert('Share link copied to clipboard!');
+      } else {
+        window.alert('Sharing not supported. Please copy the link manually: ' + shareUrl);
+      }
     } catch (e) {
-      window.alert('Failed to generate share link. Try again.');
+      window.alert('Failed to share list. Try again.');
       console.warn('Share error:', e);
     }
   };
