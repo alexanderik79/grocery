@@ -17,8 +17,18 @@ const AppContent: React.FC = () => {
     const encodedList = params.get('list');
     if (encodedList) {
       try {
-        const decodedList = JSON.parse(atob(encodedList));
-        dispatch(setItems(decodedList));
+        const decodedList = JSON.parse(decodeURIComponent(atob(encodedList)));
+        // Проверяем, что decodedList — массив объектов с нужной структурой
+        if (Array.isArray(decodedList) && decodedList.every(item => 
+          typeof item.id === 'string' &&
+          typeof item.name === 'string' &&
+          typeof item.quantity === 'number' &&
+          typeof item.purchased === 'boolean'
+        )) {
+          dispatch(setItems(decodedList));
+        } else {
+          console.warn('Invalid list format in URL');
+        }
       } catch (e) {
         console.warn('Failed to load list from URL:', e);
       }
