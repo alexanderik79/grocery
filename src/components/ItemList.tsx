@@ -65,7 +65,7 @@ const ItemList: React.FC = () => {
                 checked={item.purchased}
                 onChange={() => dispatch(togglePurchased(item.id))}
               />
-              <ItemText purchased={item.purchased}>
+              <ItemText purchased={item.purchased ? true : undefined}>
                 {item.name} (x{item.quantity})
               </ItemText>
               <DeleteButton onClick={() => handleDelete(item.id)}>

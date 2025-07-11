@@ -1,7 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { colors } from './GlobalStyles';
 
-// Анимация появления (slide-in + fade-in)
 const slideIn = keyframes`
   from {
     transform: translateX(-20px);
@@ -13,7 +12,6 @@ const slideIn = keyframes`
   }
 `;
 
-// Анимация удаления (fade-out + slide-out)
 const slideOut = keyframes`
   from {
     transform: translateX(0);
@@ -25,7 +23,6 @@ const slideOut = keyframes`
   }
 `;
 
-// Анимация для чекбокса (масштабирование)
 const scale = keyframes`
   0% {
     transform: scale(1);
@@ -59,7 +56,7 @@ export const ItemContainer = styled.div`
   }
 `;
 
-export const ItemText = styled.span<{ purchased: boolean }>`
+export const ItemText = styled.span<{ purchased?: boolean }>`
   flex-grow: 1;
   font-size: 0.9rem;
   color: ${colors.text};
