@@ -79,6 +79,44 @@ export const DeleteButton = styled.button`
   }
 `;
 
+export const ClearAllButton = styled.button`
+  font-size: 0.9rem;
+  padding: 8px;
+  background-color: ${colors.error};
+  color: ${colors.text};
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 12px;
+  &:hover {
+    background-color: ${colors.errorHover};
+  }
+  &:disabled {
+    background-color: ${colors.textSecondary};
+    cursor: not-allowed;
+  }
+`;
+
+export const ShareButton = styled.button`
+  font-size: 0.9rem;
+  padding: 8px;
+  background-color: ${colors.primary};
+  color: ${colors.text};
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 8px;
+  &:hover {
+    background-color: ${colors.primaryHover};
+  }
+  &:disabled {
+    background-color: ${colors.textSecondary};
+    cursor: not-allowed;
+  }
+`;
+
 export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   width: 16px;
   height: 16px;

@@ -13,8 +13,19 @@ interface ShoppingState {
   items: Item[];
 }
 
+const loadFromLocalStorage = (): Item[] => {
+  try {
+    const serializedState = localStorage.getItem('shoppingList');
+    if (serializedState === null) return [];
+    return JSON.parse(serializedState);
+  } catch (e) {
+    console.warn('Failed to load from localStorage:', e);
+    return [];
+  }
+};
+
 const initialState: ShoppingState = {
-  items: [],
+  items: loadFromLocalStorage(),
 };
 
 const shoppingSlice = createSlice({
@@ -27,17 +38,28 @@ const shoppingSlice = createSlice({
         id: crypto.randomUUID(),
         purchased: false,
       });
+      localStorage.setItem('shoppingList', JSON.stringify(state.items));
     },
     togglePurchased: (state, action: PayloadAction<string>) => {
       const item = state.items.find(item => item.id === action.payload);
       if (item) item.purchased = !item.purchased;
+      localStorage.setItem('shoppingList', JSON.stringify(state.items));
     },
     deleteItem: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter(item => item.id !== action.payload);
+      localStorage.setItem('shoppingList', JSON.stringify(state.items));
+    },
+    clearAll: (state) => {
+      state.items = [];
+      localStorage.setItem('shoppingList', JSON.stringify(state.items));
+    },
+    setItems: (state, action: PayloadAction<Item[]>) => {
+      state.items = action.payload;
+      localStorage.setItem('shoppingList', JSON.stringify(state.items));
     },
   },
 });
 
-export const { addItem, togglePurchased, deleteItem } = shoppingSlice.actions;
+export const { addItem, togglePurchased, deleteItem, clearAll, setItems } = shoppingSlice.actions;
 export const selectItems = (state: RootState) => state.shopping.items;
 export default shoppingSlice.reducer;
