@@ -40,41 +40,17 @@ const ItemList: React.FC = () => {
   const handleShare = () => {
     if (items.length === 0) return;
     try {
-      const encodedList = btoa(JSON.stringify(items));
+      // Очищаем данные от не-ASCII символов
+      const sanitizedItems = items.map(item => ({
+        ...item,
+        name: item.name.replace(/[^\x20-\x7E]/g, ''), // Только ASCII
+      }));
+      const encodedList = btoa(JSON.stringify(sanitizedItems));
       const shareUrl = `${window.location.origin}/?list=${encodedList}`;
-      
-      // Проверяем поддержку navigator.clipboard
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(shareUrl).then(() => {
-          window.alert('Share link copied to clipboard!');
-        }).catch(() => {
-          fallbackCopyToClipboard(shareUrl);
-        });
-      } else {
-        fallbackCopyToClipboard(shareUrl);
-      }
+      window.alert(`Copy this link to share:\n${shareUrl}`);
     } catch (e) {
-      window.alert('Failed to generate share link. Try again or check browser permissions.');
+      window.alert('Failed to generate share link. Try again.');
       console.warn('Share error:', e);
-    }
-  };
-
-  // Альтернативный метод копирования для мобильных
-  const fallbackCopyToClipboard = (text: string) => {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    document.body.appendChild(textarea);
-    textarea.select();
-    try {
-      document.execCommand('copy');
-      window.alert('Share link copied to clipboard!');
-    } catch (e) {
-      window.alert('Failed to copy share link. Please copy it manually.');
-      console.warn('Fallback copy error:', e);
-    } finally {
-      document.body.removeChild(textarea);
     }
   };
 
