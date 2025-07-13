@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import type { RootState, AppDispatch } from '../store';
 import { togglePurchased, deleteItem, clearAll } from '../features/shopping/shoppingSlice';
 import {
@@ -15,6 +16,7 @@ import {
 
 const ItemList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize useNavigate
   const items = useSelector((state: RootState) => state.shopping.items);
   const [removingItems, setRemovingItems] = useState<string[]>([]);
 
@@ -33,6 +35,7 @@ const ItemList: React.FC = () => {
       setTimeout(() => {
         dispatch(clearAll());
         setRemovingItems([]);
+        navigate('/'); // Redirect to the root path after clearing
       }, 300);
     }
   };
