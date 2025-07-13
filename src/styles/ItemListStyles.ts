@@ -3,7 +3,7 @@ import { colors } from './GlobalStyles';
 
 const slideIn = keyframes`
   from {
-    transform: translateX(-20px);
+    transform: translateX(-30px);
     opacity: 0;
   }
   to {
@@ -18,7 +18,7 @@ const slideOut = keyframes`
     opacity: 1;
   }
   to {
-    transform: translateX(20px);
+    transform: translateX(30px);
     opacity: 0;
   }
 `;
@@ -58,13 +58,13 @@ export const ItemContainer = styled.div`
 
 export const ItemText = styled.span<{ purchased?: boolean }>`
   flex-grow: 1;
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   color: ${colors.text};
   text-decoration: ${({ purchased }) => (purchased ? 'line-through' : 'none')};
 `;
 
 export const DeleteButton = styled.button`
-  font-size: 0.8rem;
+  font-size: 1.4rem;
   padding: 6px 12px;
   background-color: ${colors.error};
   color: ${colors.text};
@@ -115,8 +115,8 @@ export const ShareButton = styled.button`
 `;
 
 export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
-  width: 16px;
-  height: 16px;
+  width: 26px;
+  height: 26px;
   accent-color: ${colors.primary};
   cursor: pointer;
   &:checked {
