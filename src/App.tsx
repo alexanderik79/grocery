@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider, useDispatch } from 'react-redux';
 import type { AppDispatch } from './store';
 import { store } from './store';
@@ -7,7 +7,7 @@ import AddItem from './components/AddItem';
 import ItemList from './components/ItemList';
 import { GlobalStyle } from './styles/GlobalStyles';
 import { AppContainer, Title } from './styles/AppStyles';
-import { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom'; 
 
 const AppContent: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -19,7 +19,7 @@ const AppContent: React.FC = () => {
       try {
         const decodedList = JSON.parse(decodeURIComponent(atob(encodedList)));
         // Проверяем, что decodedList — массив объектов с нужной структурой
-        if (Array.isArray(decodedList) && decodedList.every(item => 
+        if (Array.isArray(decodedList) && decodedList.every(item =>
           typeof item.id === 'string' &&
           typeof item.name === 'string' &&
           typeof item.quantity === 'number' &&
@@ -47,7 +47,9 @@ const AppContent: React.FC = () => {
 const App: React.FC = () => (
   <Provider store={store}>
     <GlobalStyle />
-    <AppContent />
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   </Provider>
 );
 
