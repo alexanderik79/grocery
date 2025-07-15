@@ -58,13 +58,13 @@ export const ItemContainer = styled.div`
 
 export const ItemText = styled.span<{ purchased?: boolean }>`
   flex-grow: 1;
-  font-size: 2rem;
+  font-size: 2.4rem;
   color: ${colors.text};
   text-decoration: ${({ purchased }) => (purchased ? 'line-through' : 'none')};
 `;
 
 export const DeleteButton = styled.button`
-  font-size: 2rem;
+  font-size: 2.4rem;
   padding: 6px 12px;
   background-color: ${colors.error};
   color: ${colors.text};
