@@ -17,7 +17,7 @@ export const Input = styled.input`
   background-color: ${colors.card};
   color: ${colors.text};
   border: 1px solid ${colors.textSecondary};
-  border-radius: 4px;
+  border-radius: 40px;
   outline: none;
   &:focus {
     border-color: ${colors.primary};
@@ -31,7 +31,7 @@ export const Button = styled.button`
   background-color: ${colors.primary};
   color: ${colors.text};
   border: none;
-  border-radius: 4px;
+  border-radius: 40px;
   cursor: pointer;
   &:hover {
     background-color: ${colors.primaryHover};

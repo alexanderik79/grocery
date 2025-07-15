@@ -69,7 +69,7 @@ export const DeleteButton = styled.button`
   background-color: ${colors.error};
   color: ${colors.text};
   border: none;
-  border-radius: 4px;
+  border-radius: 40px;
   cursor: pointer;
   &:hover {
     background-color: ${colors.errorHover};
@@ -82,7 +82,7 @@ export const ClearAllButton = styled.button`
   background-color: ${colors.error};
   color: ${colors.text};
   border: none;
-  border-radius: 4px;
+  border-radius: 40px;
   cursor: pointer;
   align-self: center;
   margin-top: 12px;
@@ -101,7 +101,7 @@ export const ShareButton = styled.button`
   background-color: ${colors.primary};
   color: ${colors.text};
   border: none;
-  border-radius: 4px;
+  border-radius: 40px;
   cursor: pointer;
   align-self: center;
   margin-top: 8px;
