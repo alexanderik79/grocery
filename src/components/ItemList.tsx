@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import type { RootState, AppDispatch } from '../store';
 import { togglePurchased, deleteItem, clearAll } from '../features/shopping/shoppingSlice';
+import { FiTrash2 } from 'react-icons/fi';
+import { FiShare2 } from 'react-icons/fi';
 import {
   ListContainer,
   ItemContainer,
@@ -82,14 +84,17 @@ const ItemList: React.FC = () => {
                 {item.name} (x{item.quantity})
               </ItemText>
               <DeleteButton onClick={() => handleDelete(item.id)}>
-                Delete
+                <FiTrash2 style={{ marginTop: '4px' }} />
               </DeleteButton>
             </ItemContainer>
           ))}
           <ClearAllButton onClick={handleClearAll} disabled={items.length === 0}>
+            <FiTrash2 style={{ marginRight: '8px' }} />
             Clear All
           </ClearAllButton>
+
           <ShareButton onClick={handleShare} disabled={items.length === 0}>
+            <FiShare2 style={{ marginRight: '8px' }} />
             Share
           </ShareButton>
         </>

@@ -115,8 +115,8 @@ export const ShareButton = styled.button`
 `;
 
 export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
-  width: 26px;
-  height: 26px;
+  width: 50px;
+  height: 50px;
   accent-color: ${colors.primary};
   cursor: pointer;
   &:checked {
