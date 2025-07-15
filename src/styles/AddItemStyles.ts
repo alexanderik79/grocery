@@ -12,7 +12,7 @@ export const FormContainer = styled.form`
 `;
 
 export const Input = styled.input`
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   padding: 8px;
   background-color: ${colors.card};
   color: ${colors.text};
@@ -26,7 +26,7 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   padding: 8px;
   background-color: ${colors.primary};
   color: ${colors.text};

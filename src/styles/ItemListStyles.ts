@@ -58,13 +58,13 @@ export const ItemContainer = styled.div`
 
 export const ItemText = styled.span<{ purchased?: boolean }>`
   flex-grow: 1;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   color: ${colors.text};
   text-decoration: ${({ purchased }) => (purchased ? 'line-through' : 'none')};
 `;
 
 export const DeleteButton = styled.button`
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   padding: 6px 12px;
   background-color: ${colors.error};
   color: ${colors.text};
@@ -77,7 +77,7 @@ export const DeleteButton = styled.button`
 `;
 
 export const ClearAllButton = styled.button`
-  font-size: 0.9rem;
+  font-size: 1rem;
   padding: 8px;
   background-color: ${colors.error};
   color: ${colors.text};
@@ -96,7 +96,7 @@ export const ClearAllButton = styled.button`
 `;
 
 export const ShareButton = styled.button`
-  font-size: 0.9rem;
+  font-size: 1rem;
   padding: 8px;
   background-color: ${colors.primary};
   color: ${colors.text};
@@ -126,6 +126,6 @@ export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
 
 export const EmptyText = styled.p`
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: ${colors.textSecondary};
 `;
